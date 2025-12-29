@@ -1,0 +1,625 @@
+body{
+  background:
+    radial-gradient(800px 380px at 8% 8%, rgba(255,255,255,0.02), transparent 25%),
+    linear-gradient(180deg,#0b0b0d 0%, #0e0e12 40%, #0b0b0d 100%),
+    repeating-linear-gradient(45deg, rgba(255,255,255,0.002) 0 2px, transparent 2px 90px);
+  background-color:#080708;
+  background-attachment: fixed;
+  font-family: Georgia, serif;
+  padding:30px;
+  color:#e9e9e9;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  transition: background 300ms ease;
+} 
+
+.topbar{
+  max-width:1300px;
+  margin:0 auto 25px auto;
+  padding:12px 20px;
+
+  display:flex;
+  gap:12px;
+  justify-content:center;
+  align-items:center;
+  position:relative;
+
+  background: linear-gradient(90deg,#101114 0%, #17181b 100%);
+  color:#e9e9e9;
+  border-radius:12px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.6);
+  border:1px solid rgba(255,255,255,0.03);
+  overflow:visible;
+
+}
+
+.topbar::before{
+  content:'';
+  position:absolute;
+  left:14px;
+  top:10px;
+  bottom:10px;
+  width:4px;
+  border-radius:3px;
+  background: linear-gradient(180deg,#ffd27a,#ffb14f);
+  opacity:0.95;
+  mix-blend-mode: overlay;
+} 
+
+/* estilo simplificado para botões e select na topbar (tema escuro) */
+.topbar button,
+.topbar select{
+  background: rgba(255,255,255,0.03);
+  color:#e9e9e9;
+  border:1px solid rgba(255,255,255,0.04);
+  padding:8px 14px;
+  font-size:14px;
+  font-family: Georgia, serif;
+  cursor:pointer;
+  border-radius:999px;
+  transition: transform 140ms ease, background 140ms ease, box-shadow 140ms ease;
+  box-shadow: none;
+  backdrop-filter: blur(4px);
+}
+
+.topbar button:hover,
+.topbar select:hover{
+  background: rgba(255,255,255,0.06);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.4);
+}
+
+.topbar button:active{
+  transform: translateY(0);
+  opacity:0.95;
+}
+
+.topbar button:focus,
+.topbar select:focus{
+  outline:none;
+  box-shadow: 0 0 0 6px rgba(255,196,80,0.06);
+} 
+
+/* destaque suave no botão Salvar (3º botão) */
+.topbar button:nth-of-type(3){
+  background: linear-gradient(90deg,#ffd27a,#ffb14f);
+  color:#2b2b2b;
+  border-color: rgba(0,0,0,0.06);
+  box-shadow: 0 4px 14px rgba(255,158,97,0.12);
+  transform-origin:center;
+  position:relative;
+  z-index:1;
+}
+
+/* ===== FICHA ===== */
+.sheet{
+  position:relative;
+  max-width:1300px;
+  margin:auto;
+  padding:34px;
+
+  display:grid;
+  grid-template-columns:3fr 1fr;
+  gap:30px;
+
+  border-radius: 18px;
+
+  /* deep blue base (user requested #171c58) */
+  background:
+    linear-gradient(180deg, #171c58 0%, #12133f 60%, #0a0b25 100%),
+    radial-gradient(700px 240px at 10% 0%, rgba(255,255,255,0.02), transparent 30%);
+  border:1px solid rgba(255,255,255,0.04);
+  box-shadow: 0 12px 32px rgba(3,6,20,0.72), inset 0 1px 0 rgba(255,255,255,0.02);
+  overflow:hidden;
+  color:#e9e9e9;
+}
+
+/* subtle vignette for deep blue */
+.sheet::after{
+  content:'';
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  border-radius:inherit;
+  box-shadow: inset 0 40px 80px rgba(0,0,0,0.25);
+  mix-blend-mode: multiply;
+} 
+
+/* ===== BLOCOS ===== */
+.block{
+  margin-bottom:24px;
+}
+
+h2{
+  font-size:20px;
+  margin-bottom:8px;
+  padding-bottom:4px;
+
+  border-bottom:2px solid #2b2b2b;
+  font-weight:normal;
+}
+
+/* ===== CAMPOS ===== */
+.rowblock{
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  margin-bottom: 16px;
+}
+
+/* field wrapper for label-over-border style */
+.field{
+  position: relative;
+  display: inline-block;
+  border: 2px solid rgba(43,43,43,0.12);
+  background: rgba(255,255,255,0.02);
+  padding: 10px 10px 8px; /* reduced spacing */
+  border-radius: 10px;
+  transition: box-shadow 160ms ease, border-color 160ms ease, background 160ms ease, transform 120ms ease;
+  overflow: visible;
+}
+
+/* Fields inside content blocks (e.g., História, Habilidades) should stretch full width */
+.block .field{
+  display: block;
+  width: 100%;
+}
+
+.field.large{
+  min-width: 200px;
+}
+
+.field.small{
+  width: 90px;
+  min-width: 90px;
+  padding:6px 8px 4px; /* reduced padding */
+}
+
+.field label{
+  position: absolute;
+  top: 6px;
+  left: 14px;
+  background: rgba(255,255,255,0.02);
+  padding: 2px 8px;
+  font-size: 12px;
+  color: #f5e7c0; /* warm light for contrast */
+  pointer-events: none;
+  font-weight: 600;
+  border-radius: 6px;
+  line-height: 1;
+  z-index: 2;
+  transform-origin: left center;
+  transition: transform 120ms ease, background 160ms ease, color 160ms ease;
+}
+
+/* Labels above inputs for rowblock fields (Nome, Profissão, Idade, Altura) */
+.rowblock{
+  gap:14px;
+}
+
+.rowblock .field{
+  border:1px solid rgba(255,255,255,0.06);
+  background: rgba(255,255,255,0.02);
+  padding:8px 10px;
+  border-radius:8px;
+  flex:1 1 auto;
+  box-shadow: none;
+  transition: box-shadow 140ms ease, border-color 140ms ease, transform 100ms ease;
+}
+
+.rowblock .field.large{
+  flex:0 0 260px; /* reduced width for Nome/Profissão */
+  max-width:320px;
+}
+
+.rowblock .field.small{
+  flex:0 0 110px;
+  padding:6px 8px;
+  text-align:center;
+}
+
+.rowblock .field label{
+  display:block;
+  margin-bottom:6px;
+  color: rgba(233,230,221,0.95);
+  font-weight:600;
+  padding:0;
+  transform:none;
+  z-index:auto;
+}
+
+.rowblock .field input{
+  background: transparent;
+  border: none;
+  padding:6px 0;
+  color: #f5f7f7;
+  font-weight:500;
+}
+
+.rowblock .field:focus-within{
+  border-color: rgba(255,196,80,0.12);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12), 0 0 0 4px rgba(255,158,97,0.04);
+  transform: none;
+}
+
+.field input{
+  display: block;
+  width: 100%;
+}
+
+/* Inputs inside content blocks use the .field border; keep the input transparent inside */
+.block .field input{
+  background: transparent;
+  border: none;
+  padding: 6px 0;
+  text-align: left;
+  color: #151515;
+}
+
+label{
+  font-size: inherit;
+  margin: 0;
+}
+input{
+  background: linear-gradient(180deg,#ffdca8 0%, #f6e8dc 60%);
+  border-radius: 10px;
+  padding: 8px 12px;
+  border: 1px solid rgba(43,43,43,0.12);
+  box-sizing: border-box;
+  text-align: center;
+  margin-bottom: 6px;
+  color: #151515;
+  font-weight:500;
+  box-shadow: inset 0 6px 14px rgba(0,0,0,0.12);
+  transition: box-shadow 160ms ease, transform 120ms ease, background 160ms ease;
+}
+
+/* center small numeric-like inputs inside their small fields */
+.field.small input{ text-align:center; }
+
+input::placeholder{ color: rgba(21,21,21,0.5); }
+
+input:focus{
+  outline:none;
+  box-shadow: 0 14px 34px rgba(255,158,97,0.12), inset 0 2px 6px rgba(255,255,255,0.12);
+  transform: translateY(-2px);
+}
+
+textarea{
+  width:100%;
+  box-sizing: border-box;
+  background: transparent;
+  border: none;
+  border-radius: 6px;
+  padding:10px 0;
+  font-family: Georgia, serif;
+  font-size:15px;
+  color: #151515;
+  font-weight: 500;
+  caret-color: #2b2b2b;
+  box-shadow: none;
+  transition: box-shadow 200ms ease, transform 120ms ease, background 200ms ease;
+  backdrop-filter: none;
+}
+
+textarea::placeholder{ color: rgba(21,21,21,0.45); font-style: italic; }
+
+textarea:focus{ outline:none; /* handled by .field focus */ transform:none; }
+
+/* highlight border when field contains focus */
+.field:focus-within{
+  box-shadow: 0 10px 30px rgba(0,0,0,0.12), 0 0 0 4px rgba(255,158,97,0.06);
+  background: rgba(255,255,255,0.045);
+}
+
+.field:focus-within label{ transform: translateY(-6px); color:#2b2b2b; background: rgba(255,255,255,0.045); }
+
+textarea{
+  min-height:170px;
+  resize:vertical;
+}  
+
+/* ===== LINHAS ===== */
+.row{
+  display:grid;
+  grid-template-columns:2fr 2fr;
+  gap:14px;
+}
+
+/* split row inside a block to place a wide field and a side field (ex: Habilidades + Proficiência) */
+.block .row-split{
+  display:flex;
+  gap:12px;
+  align-items:flex-start;
+}
+
+.block .row-split .field{
+  flex:1 1 auto;
+}
+
+.block .row-split .field.proficiency{
+  flex:0 0 220px; /* width of the proficiency input (increased) */
+  display:flex;
+  flex-direction:column;
+} 
+
+.block .row-split .field.proficiency input{
+  width:100%;
+  box-sizing:border-box;
+  text-align:left;
+  padding:6px 0;
+  border-radius:6px;
+  background: transparent;
+  border: none;
+  color:#151515;
+  font-weight:500;
+  box-shadow: none;
+  transition: color 120ms ease, transform 120ms ease;
+} 
+
+/* keep the textarea a bit narrower inside split rows to match previous sizing */
+.block .row-split textarea{
+  width:97%;
+  box-sizing:border-box;
+}
+
+/* ===== RETRATO ===== */
+.portrait{
+  position:relative;
+  height:330px;
+
+  background:#a9a2a8;
+  border:2px solid #2b2b2b;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+
+  box-shadow:
+    inset 0 0 0 1px rgba(0,0,0,0.15);
+}
+
+.portrait img{
+  max-width:250px;
+  max-height:100%;
+  object-fit:contain;
+  cursor:pointer;
+  margin-left:auto;
+  margin-right: auto;
+ 
+}
+
+.placeholder{
+  font-size:14px;
+  color:#333;
+  pointer-events:none;
+}
+
+/* botão da imagem */
+.img-btn{
+  position:absolute;
+  bottom:8px;
+  right:8px;
+
+  background:#f0ecef;
+  border:2px solid #2b2b2b;
+
+  padding:6px 10px;
+  font-size:13px;
+  font-family:Georgia, serif;
+  cursor:pointer;
+}
+
+/* ===== ATRIBUTOS ===== */
+.attrs{
+  position:relative;
+  padding:12px 10px 8px; /* smaller top padding since title is in normal flow */
+  background: linear-gradient(180deg, rgba(8,6,10,0.28), rgba(6,5,8,0.08));
+  border-radius:10px;
+  border:2px solid rgba(255,196,80,0.06);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.02);
+  margin-top:8px;
+}
+
+/* title inside the attrs border */
+.attrs h2.inside{
+  position:relative; /* flow element placed above the first attribute */
+  display:block;
+  margin:0 0 8px 0;
+  background: rgba(0,0,0,0.20);
+  padding:6px 10px;
+  color:#ffd27a;
+  font-size:14px;
+  font-weight:700;
+  border-radius:6px;
+  z-index:3;
+}
+
+.attrs h2.inside::before{
+  content: '✦';
+  margin-right:8px;
+  color:#ffd27a;
+  font-size:14px;
+  vertical-align:middle;
+}
+
+.attrs h2.inside::before{
+  content: '✦';
+  margin-right:8px;
+  color:#ffd27a;
+  font-size:14px;
+}
+
+.attrs div{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:6px; /* reduced gap */
+  padding:6px 8px;  /* reduced inner padding */
+  border-radius:6px;
+  transition: background 140ms ease, transform 100ms ease;
+  font-family: Georgia, serif;
+  font-weight:600;
+  color:#fff4dd;
+  text-shadow: 0 1px 0 rgba(0,0,0,0.6);
+}
+
+.attrs div:hover{
+  background: linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  transform: translateY(-2px);
+}
+
+.attrs input{
+  width:72px;
+  text-align:center;
+  background: rgba(0,0,0,0.12);
+  border:1px solid rgba(255,196,80,0.12);
+  color:#fff4dd;
+  padding:6px 8px;
+  border-radius:6px;
+  box-shadow: inset 0 3px 8px rgba(0,0,0,0.4);
+  transition: box-shadow 140ms ease, border-color 140ms ease;
+  margin-right:0;
+}
+
+.attrs input:focus{
+  outline:none;
+  box-shadow: 0 6px 20px rgba(255,196,80,0.12), inset 0 3px 8px rgba(0,0,0,0.6);
+  border-color: rgba(255,196,80,0.3);
+}
+
+/* ===== LOG ===== */
+.log{
+  background:#dcd7db;
+  border-radius: 4px;
+  padding:10px;
+
+  max-height:170px;
+  overflow-y:auto;
+
+  font-size:14px;
+  box-shadow:
+    inset 0 0 0 1px rgba(0,0,0,0.15);
+}
+
+/* ===== SCROLL ===== */
+textarea::-webkit-scrollbar,
+.log::-webkit-scrollbar{
+  width:8px;
+}
+
+textarea::-webkit-scrollbar-thumb,
+.log::-webkit-scrollbar-thumb{
+  background:#999;
+  border:2px solid #2b2b2b;
+}
+/* ===== CAIXAS COM BORDA PARA CAMPOS PRINCIPAIS ===== */
+#nome,
+#profissao{
+  border: 2px solid #2b2b2b;
+  border-radius: 8px;
+  padding: 8px 12px;
+  background: #ff9f63;
+  text-align: left;
+}
+
+#idade,
+#altura{
+  border: 2px solid #2b2b2b;
+  border-radius: 8px;
+  padding: 6px 10px;
+  text-align: center;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* ===== RESPONSIVE (tablet up to 1280px and mobile) ===== */
+@media (max-width: 1280px) {
+  .sheet{
+    grid-template-columns: 2fr 1fr;
+    gap:18px;
+    padding:24px;
+  }
+
+  .topbar{
+    padding:10px 14px;
+  }
+
+  .topbar button,
+  .topbar select{
+    padding:7px 12px;
+    font-size:13px;
+  }
+
+  .rowblock .field.large{
+    flex:0 0 220px;
+    max-width:260px;
+  }
+
+  .attrs{
+    padding:14px 10px 8px;
+  }
+}
+
+@media (max-width: 600px) {
+  body{
+    padding:18px;
+  }
+
+  .topbar{
+    flex-wrap:wrap;
+    gap:8px;
+    justify-content:space-between;
+  }
+
+  .topbar > *{
+    flex: 1 1 100%;
+    width:100%;
+  }
+
+  .topbar button,
+  .topbar select{
+    padding:10px 12px;
+    font-size:14px;
+  }
+
+  .sheet{
+    grid-template-columns: 1fr;
+    padding:18px;
+    gap:16px;
+  }
+
+  .portrait{
+    height:220px;
+  }
+
+  textarea{
+    min-height:120px;
+  }
+
+  .rowblock{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+  }
+
+  .rowblock .field.large{
+    flex:1 1 auto;
+    max-width:none;
+  }
+
+  .rowblock .field.small{
+    flex:0 0 auto;
+    width:100%;
+  }
+
+  .attrs div{
+    padding:6px 6px;
+    margin-bottom:6px;
+  }
+
+  .attrs input{
+    width:60px;
+  }
+}

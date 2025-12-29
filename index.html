@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Fichas de RPG</title>
+<link rel="stylesheet" href="Css/Style.css">
+</head>
+
+<body>
+
+<div class="topbar">
+  <button onclick="rolar()">Rolar Dado</button>
+  <button onclick="novaFicha()">Nova Ficha</button>
+  <select id="lista" onchange="carregarFicha()">Ficha</select>
+  <button onclick="salvarFicha()">Salvar</button>
+  <button onclick="apagarFicha()">Apagar Ficha</button>
+</div>
+
+<div class="sheet">
+
+  <div>
+    <form action="">
+      <div class="rowblock">
+        <div class="field large">
+          <label for="nome">Nome</label>
+          <input id="nome" placeholder="Nome" required>
+        </div>
+        <div class="field small">
+          <label for="idade">Idade</label>
+          <input id="idade" placeholder="Idade" required>
+        </div>
+      </div>
+
+      <div class="rowblock">
+        <div class="field large">
+          <label for="profissao">Profissão</label>
+          <input id="profissao" placeholder="Profissão" required>
+        </div>
+        <div class="field small">
+          <label for="altura">Altura</label>
+          <input id="altura" placeholder="Altura" required>
+        </div> 
+      </div>
+    </form>
+    
+
+    <div class="block">
+        <div class="field">
+          <label for="historia">História</label>
+          <textarea id="historia" placeholder="Conte a historia do seu Personagem." required></textarea>
+        </div>
+      </div>
+    <div class="block">
+      <div class="field">
+        <label for="apocalipse">Dia do Apocalipse</label>
+        <textarea id="apocalipse" placeholder="Descreva o dia do Apocalipse." required></textarea>
+      </div>
+    </div>
+
+    <div class="block">
+      <div class="field">
+        <label for="habilidades">Habilidades</label>
+        <textarea id="habilidades" placeholder="Liste Habilidades do Personagem." required></textarea>
+      </div>
+    </div> 
+
+    <div class="block">
+      <div class="row-split">
+        <div class="field">
+          <label for="equip">Equipamento</label>
+          <textarea id="equip" placeholder="Coloque o Equipamento do Personagem." required></textarea>
+        </div>
+
+        <div class="field proficiency">
+          <label for="proficiencia">Proficiência</label>
+          <input id="proficiencia" required placeholder="Descreva a proficiência">
+        </div>
+      </div>
+    </div> 
+  </div>
+  <div>
+
+    <div class="portrait">
+      <span id="placeholder" class="placeholder">Clique para adicionar imagem</span>
+      <img id="img" onclick="abrirImagem()">
+      
+      <button id="imgBtn" class="img-btn" onclick="abrirImagem()">Selecionar imagem</button>
+      <input id="fileImg" type="file" accept="image/*" onchange="carregarImagem(event)" hidden>
+    </div>
+
+    <div class="block">
+      <div class="attrs">
+        <h2 class="inside">Atributos</h2>
+        <div>FOR <input id="FOR" required></div>
+        <div>AGI <input id="AGI" required></div>
+        <div>CON <input id="CON" required></div>
+        <div>INT <input id="INT" required></div>
+        <div>PER <input id="PER" required></div>
+        <div>CAR <input id="CAR" required></div>
+        <div>SOB <input id="SOB" required></div>
+        <div>TEC <input id="TEC" required></div>
+      </div>
+    </div>
+
+    <div class="block">
+      <h2>Histórico de Rolagens</h2>
+      <div id="log" class="log"></div>
+    </div>
+
+
+
+  </div>
+</div>
+<script src="Js/rolagem.js"></script>
+</body>
+</html>
